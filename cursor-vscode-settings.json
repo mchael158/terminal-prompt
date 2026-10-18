@@ -1,0 +1,11 @@
+{
+  "workbench.colorCustomizations": {
+    "terminal.background": "#071422",
+    "terminal.foreground": "#e8eef2",
+    "terminalCursor.foreground": "#ff5f87"
+  },
+  "terminal.integrated.fontFamily": "'Cascadia Code NF', 'Cascadia Mono NF'",
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.defaultProfile.windows": "PowerShell"
+}

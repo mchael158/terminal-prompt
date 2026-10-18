@@ -1,0 +1,35 @@
+{
+  "profiles": {
+    "defaults": {
+      "font": {
+        "face": "Cascadia Code NF",
+        "size": 14
+      },
+      "colorScheme": "Prompt Navy"
+    }
+  },
+  "schemes": [
+    {
+      "name": "Prompt Navy",
+      "background": "#071422",
+      "foreground": "#E8EEF2",
+      "cursorColor": "#FF5F87",
+      "black": "#071422",
+      "red": "#FF5555",
+      "green": "#50FA7B",
+      "yellow": "#F1FA8C",
+      "blue": "#5FD7FF",
+      "purple": "#BD93F9",
+      "cyan": "#8BE9FD",
+      "white": "#E8EEF2",
+      "brightBlack": "#6272A4",
+      "brightRed": "#FF6E6E",
+      "brightGreen": "#69FF94",
+      "brightYellow": "#FFFFA5",
+      "brightBlue": "#8BE9FD",
+      "brightPurple": "#FF79C6",
+      "brightCyan": "#A4FFFF",
+      "brightWhite": "#FFFFFF"
+    }
+  ]
+}

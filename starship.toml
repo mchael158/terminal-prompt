@@ -1,0 +1,79 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+# Prompt no estilo da foto: sistema, pasta, git, Rust, data e bateria.
+add_newline = false
+command_timeout = 1000
+
+format = """
+$os\
+$directory\
+$git_branch\
+$git_status\
+$rust\
+$time\
+$battery\
+$line_break\
+$character"""
+
+[os]
+disabled = false
+style = "bold #5fd7ff"
+format = "[$symbol$type]($style) "
+
+[os.symbols]
+Windows = " "
+
+[directory]
+style = "bold #ff79c6"
+format = "in [ $path]($style) "
+truncation_length = 3
+truncation_symbol = "…/"
+home_symbol = "~"
+use_os_path_sep = false
+truncate_to_repo = false
+
+[git_branch]
+symbol = " "
+style = "bold #bd93f9"
+format = "on [$symbol$branch]($style) "
+
+[git_status]
+style = "bold #ffb86c"
+format = "([$all_status$ahead_behind]($style) )"
+modified = "✎"
+untracked = "?"
+staged = "+"
+deleted = "✘"
+renamed = "»"
+stashed = "$"
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+conflicted = "="
+
+[rust]
+style = "bold #ff5555"
+symbol = " "
+format = "via [$symbol$version]($style) "
+
+[time]
+disabled = false
+style = "bold #f1fa8c"
+time_format = "%a, %d/%m/%Y - %H:%M"
+format = "at [ $time]($style) "
+
+[battery]
+format = "[$symbol$percentage]($style) "
+full_symbol = " "
+charging_symbol = " "
+discharging_symbol = " "
+unknown_symbol = " "
+empty_symbol = " "
+
+[[battery.display]]
+threshold = 100
+style = "bold #50fa7b"
+
+[character]
+success_symbol = "[➜](bold #ff5f87) "
+error_symbol = "[➜](bold #ff5555) "
