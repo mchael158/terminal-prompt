@@ -37,20 +37,23 @@ import json, os, sys
 fragment_path = sys.argv[1]
 with open(fragment_path, encoding="utf-8") as handle:
     fragment = json.load(handle)
+fragment.pop("terminal.integrated.defaultProfile.windows", None)
 home = os.path.expanduser("~")
-paths = [
-    os.path.join(home, ".config", "Cursor", "User", "settings.json"),
-    os.path.join(home, ".config", "Code", "User", "settings.json"),
-]
-for path in paths:
-    if not os.path.isfile(path):
+editors = ["Cursor", "Code", "Code - OSS"]
+for name in editors:
+    root = os.path.join(home, ".config", name)
+    if not os.path.isdir(root):
         continue
-    try:
-        with open(path, encoding="utf-8") as handle:
-            current = json.load(handle)
-    except json.JSONDecodeError:
-        print("settings com comentario, nao alterado:", path)
-        continue
+    path = os.path.join(root, "User", "settings.json")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    current = {}
+    if os.path.isfile(path):
+        try:
+            with open(path, encoding="utf-8") as handle:
+                current = json.load(handle)
+        except json.JSONDecodeError:
+            print("settings com comentario, nao alterado:", path)
+            continue
     colors = current.setdefault("workbench.colorCustomizations", {})
     colors.update(fragment.get("workbench.colorCustomizations", {}))
     for key, value in fragment.items():
@@ -61,7 +64,50 @@ for path in paths:
         handle.write("\n")
 PY
 
+if command -v kitty >/dev/null 2>&1 || [[ -d "$HOME/.config/kitty" ]]; then
+  mkdir -p "$HOME/.config/kitty"
+  cp "$here/linux/kitty.conf" "$HOME/.config/kitty/vanta.conf"
+  touch "$HOME/.config/kitty/kitty.conf"
+  if ! grep -q "# terminal-prompt" "$HOME/.config/kitty/kitty.conf"; then
+    printf '\n# terminal-prompt\ninclude vanta.conf\n' >> "$HOME/.config/kitty/kitty.conf"
+  fi
+fi
+
+if command -v alacritty >/dev/null 2>&1 || [[ -d "$HOME/.config/alacritty" ]]; then
+  mkdir -p "$HOME/.config/alacritty"
+  cp "$here/linux/alacritty.toml" "$HOME/.config/alacritty/vanta.toml"
+  conf="$HOME/.config/alacritty/alacritty.toml"
+  if [[ ! -f "$conf" ]]; then
+    printf '# terminal-prompt\n[general]\nimport = ["~/.config/alacritty/vanta.toml"]\n' > "$conf"
+  elif ! grep -q "# terminal-prompt" "$conf"; then
+    printf '\n# terminal-prompt\n[general]\nimport = ["~/.config/alacritty/vanta.toml"]\n' >> "$conf"
+  fi
+fi
+
+if command -v foot >/dev/null 2>&1 || [[ -d "$HOME/.config/foot" ]]; then
+  mkdir -p "$HOME/.config/foot"
+  cp "$here/linux/foot.ini" "$HOME/.config/foot/vanta.ini"
+  conf="$HOME/.config/foot/foot.ini"
+  touch "$conf"
+  if ! grep -q "# terminal-prompt" "$conf"; then
+    printf '\n# terminal-prompt\ninclude=~/.config/foot/vanta.ini\n' >> "$conf"
+  fi
+fi
+
+if command -v dconf >/dev/null 2>&1 && dconf list /org/gnome/terminal/legacy/profiles:/ >/dev/null 2>&1; then
+  uuid=$(dconf read /org/gnome/terminal/legacy/profiles:/default | tr -d "'\" \n" || true)
+  if [[ -n "$uuid" ]]; then
+    base="/org/gnome/terminal/legacy/profiles:/:$uuid"
+    dconf write "$base/use-theme-colors" false || true
+    dconf write "$base/use-transparent-background" true || true
+    dconf write "$base/background-transparency-percent" 100 || true
+    dconf write "$base/foreground-color" "'#FF334A'" || true
+    dconf write "$base/background-color" "'#0A0E14'" || true
+    dconf write "$base/palette" "['#4A0610', '#E1062C', '#FF1F38', '#FF4D5A', '#C40024', '#FF2D4A', '#FF6B74', '#FF8A94', '#8E1020', '#FF0033', '#FF2A40', '#FF5C66', '#FF1744', '#FF4060', '#FF7A84', '#FFB4BA']" || true
+  fi
+fi
+
 echo "Prompt copiado."
 echo "Abra um terminal novo e recarregue a janela da IDE."
 echo "Instale o Starship se ainda nao tiver: curl -sS https://starship.rs/install.sh | sh"
-echo "Instale uma Nerd Font, por exemplo Cascadia Code NF, para os icones."
+echo "Instale a fonte: no Arch, sudo pacman -S ttf-jetbrains-mono-nerd"

@@ -1,0 +1,42 @@
+# terminal-prompt
+
+[window]
+opacity = 0.0
+
+[font]
+size = 13
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[colors.primary]
+foreground = "#FF334A"
+background = "#0A0E14"
+
+[colors.cursor]
+cursor = "#FF0033"
+
+[colors.selection]
+background = "#FF1F38"
+foreground = "#FFB4BA"
+
+[colors.normal]
+black = "#4A0610"
+red = "#E1062C"
+green = "#FF1F38"
+yellow = "#FF4D5A"
+blue = "#C40024"
+magenta = "#FF2D4A"
+cyan = "#FF6B74"
+white = "#FF8A94"
+
+[colors.bright]
+black = "#8E1020"
+red = "#FF0033"
+green = "#FF2A40"
+yellow = "#FF5C66"
+blue = "#FF1744"
+magenta = "#FF4060"
+cyan = "#FF7A84"
+white = "#FFB4BA"

@@ -13,6 +13,7 @@ O fundo do terminal usa a mesma transparência do tema, `#0a0e1400`. As letras f
 - `shell/bash.sh`, `shell/zsh.sh`, `shell/fish.fish` — ligam o Starship no Linux
 - `IDE.json` — fonte e cores do terminal da IDE
 - `windows-terminal-fragment.json` — o mesmo esquema, para o Windows Terminal
+- `linux/` — as mesmas cores para Kitty, Alacritty, Foot e GNOME Terminal
 - `install.ps1` — instala no Windows
 - `install.sh` — instala no Linux
 
@@ -34,7 +35,7 @@ curl -sS https://starship.rs/install.sh | sh
 bash install.sh
 ```
 
-Instale a mesma fonte. No Arch, um pacote comum é `ttf-jetbrains-mono-nerd`. O nome da família pode ser `JetBrainsMono Nerd Font`. Se a Cascadia Code NF já estiver instalada, a IDE também aceita essa fonte.
+No Arch, a fonte é `sudo pacman -S ttf-jetbrains-mono-nerd`. Em outras distribuições, instale o pacote Nerd Font da JetBrains Mono. O `install.sh` liga o Bash, o Zsh e o Fish, copia as cores vermelhas para a IDE e, se estiverem instalados, para o Kitty, o Alacritty, o Foot e o GNOME Terminal. O fundo fica transparente e o nome do sistema sai como o da distribuição.
 
 ## Depois de instalar
 
