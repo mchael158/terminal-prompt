@@ -4,7 +4,7 @@ Tema VANTA: três linhas, marca em Fraktur, vermelho profundo e os mesmos dados 
 
 Quem abre o PowerShell, o Bash, o Zsh ou o Fish carrega esse prompt em qualquer IDE.
 
-O fundo do terminal usa a mesma transparência do tema, `#0a0e1400`. O texto fica marfim para continuar legível. As cores do `cargo` (`Compiling`, `Finished`, `Running`) continuam sendo do próprio Cargo.
+O fundo do terminal usa a mesma transparência do tema, `#0a0e1400`. As letras ficam numa escala de vermelho, do sangue ao escarlate. As cores do `cargo` (`Compiling`, `Finished`, `Running`) continuam sendo do próprio Cargo.
 
 ## O que tem aqui
 

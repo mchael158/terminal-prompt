@@ -1,14 +1,25 @@
 {
   "workbench.colorCustomizations": {
     "terminal.background": "#0a0e1400",
-    "terminal.foreground": "#E8DFE1",
-    "terminalCursor.foreground": "#C21F36",
-    "terminal.selectionBackground": "#C21F366b",
-    "terminal.ansiBlack": "#393237",
-    "terminal.ansiRed": "#C21F36",
-    "terminal.ansiBrightRed": "#FF334A",
-    "terminal.ansiWhite": "#E8DFE1",
-    "terminal.ansiBrightWhite": "#FFFFFF"
+    "terminal.foreground": "#FF334A",
+    "terminalCursor.foreground": "#FF0033",
+    "terminal.selectionBackground": "#FF1F386b",
+    "terminal.ansiBlack": "#4A0610",
+    "terminal.ansiRed": "#E1062C",
+    "terminal.ansiGreen": "#FF1F38",
+    "terminal.ansiYellow": "#FF4D5A",
+    "terminal.ansiBlue": "#C40024",
+    "terminal.ansiMagenta": "#FF2D4A",
+    "terminal.ansiCyan": "#FF6B74",
+    "terminal.ansiWhite": "#FF8A94",
+    "terminal.ansiBrightBlack": "#8E1020",
+    "terminal.ansiBrightRed": "#FF0033",
+    "terminal.ansiBrightGreen": "#FF2A40",
+    "terminal.ansiBrightYellow": "#FF5C66",
+    "terminal.ansiBrightBlue": "#FF1744",
+    "terminal.ansiBrightMagenta": "#FF4060",
+    "terminal.ansiBrightCyan": "#FF7A84",
+    "terminal.ansiBrightWhite": "#FFB4BA"
   },
   "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'JetBrainsMono Nerd Font Mono', 'Cascadia Code NF', monospace",
   "terminal.integrated.fontSize": 13,
@@ -18,6 +29,6 @@
   "terminal.integrated.cursorWidth": 2,
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.gpuAcceleration": "off",
-  "terminal.integrated.minimumContrastRatio": 7,
+  "terminal.integrated.minimumContrastRatio": 1,
   "terminal.integrated.defaultProfile.windows": "PowerShell"
 }
