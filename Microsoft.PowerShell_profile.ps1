@@ -1,11 +1,12 @@
-# Carrega o prompt Starship em todo terminal que abre o PowerShell,
-# inclusive Cursor, VS Code e qualquer outra IDE.
-$env:STARSHIP_CONFIG = Join-Path $env:USERPROFILE ".config\starship.toml"
+# Liga o Starship no PowerShell, no Windows e no Linux.
+$env:STARSHIP_CONFIG = Join-Path (Join-Path $env:USERPROFILE ".config") "starship.toml"
 
-$starship = Join-Path $env:LOCALAPPDATA "Microsoft\WinGet\Packages\Starship.Starship_Microsoft.Winget.Source_8wekyb3d8bbwe\starship.exe"
-if (-not (Test-Path -LiteralPath $starship)) {
-    $found = Get-Command starship -ErrorAction SilentlyContinue
-    if ($found) { $starship = $found.Source }
+$starship = $null
+$found = Get-Command starship -ErrorAction SilentlyContinue
+if ($found) { $starship = $found.Source }
+if (-not $starship -and $env:LOCALAPPDATA) {
+    $winget = Join-Path $env:LOCALAPPDATA "Microsoft\WinGet\Packages\Starship.Starship_Microsoft.Winget.Source_8wekyb3d8bbwe\starship.exe"
+    if (Test-Path -LiteralPath $winget) { $starship = $winget }
 }
 
 if ($starship -and (Test-Path -LiteralPath $starship)) {

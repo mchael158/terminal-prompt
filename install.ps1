@@ -1,4 +1,4 @@
-# Restaura o prompt neste Windows. Rode numa janela nova do PowerShell:
+# Restaura o prompt no Windows. No Linux, use install.sh.
 #   powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 $ErrorActionPreference = "Stop"
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -7,9 +7,16 @@ $configDir = Join-Path $env:USERPROFILE ".config"
 New-Item -ItemType Directory -Force -Path $configDir | Out-Null
 Copy-Item (Join-Path $here "starship.toml") (Join-Path $configDir "starship.toml") -Force
 
-$profileDir = Split-Path -Parent $PROFILE
-New-Item -ItemType Directory -Force -Path $profileDir | Out-Null
-Copy-Item (Join-Path $here "Microsoft.PowerShell_profile.ps1") $PROFILE -Force
+$profiles = @($PROFILE)
+$pwsh = Get-Command pwsh -ErrorAction SilentlyContinue
+if ($pwsh) {
+    $profiles += (& $pwsh.Source -NoProfile -Command 'Write-Output $PROFILE')
+}
+foreach ($target in ($profiles | Select-Object -Unique)) {
+    if (-not $target) { continue }
+    New-Item -ItemType Directory -Force -Path (Split-Path -Parent $target) | Out-Null
+    Copy-Item (Join-Path $here "Microsoft.PowerShell_profile.ps1") $target -Force
+}
 
 function Merge-TerminalSettings([string]$path) {
     if (-not (Test-Path -LiteralPath $path)) { return }
