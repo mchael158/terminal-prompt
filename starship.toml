@@ -1,24 +1,30 @@
-"$schema" = "https://starship.rs/config-schema.json"
+"$schema" = 'https://starship.rs/config-schema.json'
 
-# Prompt no estilo da foto: sistema, pasta, git, Rust, data e bateria.
+# VANTA // BLACK SIGIL
+# O mesmo arquivo no Linux e no Windows. $type troca Windows por Arch, Ubuntu, etc.
 add_newline = false
+scan_timeout = 100
 command_timeout = 1000
+palette = 'vanta'
 
 format = """
-$os\
-$directory\
-$git_branch\
-$git_status\
-$rust\
-$time\
-$battery\
-$line_break\
-$character"""
+[╭─](bold crimson)[ 𝖁𝕬𝕹𝕿𝕬 ](bold ivory)[ ╱╱ ](muted)$os
+[│](crimson) $time
+[├─](crimson) $directory$git_branch$git_status$rust$cmd_duration$status
+[╰─](bold crimson)$character"""
+
+[palettes.vanta]
+crimson = '#C21F36'
+blood = '#7D1425'
+ivory = '#E8DFE1'
+muted = '#665A60'
+steel = '#A49AA0'
+dim = '#393237'
 
 [os]
 disabled = false
-style = "bold #5fd7ff"
-format = "[$symbol$type]($style) "
+format = '[ ▣ $type](muted) '
+style = 'bold muted'
 
 [os.symbols]
 AIX = " "
@@ -84,56 +90,73 @@ Windows = "󰍲 "
 Zorin = " "
 
 [directory]
-style = "bold #ff79c6"
-format = "in [ $path]($style) "
-truncation_length = 3
-truncation_symbol = "…/"
-home_symbol = "~"
-use_os_path_sep = false
+format = '[⌘ $path]($style)[$read_only]($read_only_style)'
+style = 'bold ivory'
+truncation_length = 4
 truncate_to_repo = false
+truncation_symbol = '…/'
+read_only = ' [LOCK]'
+read_only_style = 'bold crimson'
+home_symbol = '~'
+use_os_path_sep = false
+before_repo_root_style = 'muted'
+repo_root_style = 'bold ivory'
+repo_root_format = '[⌘ $before_root_path]($style)[$repo_root]($repo_root_style)[$path]($style) '
 
 [git_branch]
-symbol = " "
-style = "bold #bd93f9"
-format = "on [$symbol$branch]($style) "
+symbol = ' ⎇ '
+format = '[╺](dim)[ $symbol$branch ](bold crimson)'
+style = 'bold crimson'
+truncation_length = 32
+truncation_symbol = '…'
 
 [git_status]
-style = "bold #ffb86c"
-format = "([$all_status$ahead_behind]($style) )"
-modified = "✎"
-untracked = "?"
-staged = "+"
-deleted = "✘"
-renamed = "»"
-stashed = "$"
-ahead = "⇡"
-behind = "⇣"
-diverged = "⇕"
-conflicted = "="
+format = '[$all_status$ahead_behind](bold blood) '
+conflicted = '[≠${count}](bold crimson) '
+ahead = '[↑${count}](steel) '
+behind = '[↓${count}](steel) '
+diverged = '[↕${ahead_count}/${behind_count}](bold crimson) '
+untracked = '[?${count}](muted) '
+stashed = '[≡${count}](steel) '
+modified = '[~${count}](crimson) '
+staged = '[+${count}](ivory) '
+renamed = '[»${count}](steel) '
+deleted = '[×${count}](bold crimson) '
 
 [rust]
-style = "bold #ff5555"
-symbol = " "
-format = "via [$symbol$version]($style) "
+symbol = 'ᚱ '
+format = '[╺](dim)[ $symbol$version ](bold steel)'
+style = 'bold steel'
+detect_extensions = ['rs']
+detect_files = ['Cargo.toml']
+detect_folders = []
 
 [time]
 disabled = false
-style = "bold #f1fa8c"
-time_format = "%a, %d/%m/%Y - %H:%M"
-format = "at [ $time]($style) "
+format = '[ ⧗ $time ](muted)'
+time_format = '%a · %d/%m/%Y · %H:%M:%S'
+style = 'muted'
+utc_time_offset = 'local'
 
-[battery]
-format = "[$symbol$percentage]($style) "
-full_symbol = " "
-charging_symbol = " "
-discharging_symbol = " "
-unknown_symbol = " "
-empty_symbol = " "
+[cmd_duration]
+min_time = 500
+format = '[╺](dim)[ ◷ $duration ](steel)'
+style = 'steel'
+show_milliseconds = true
 
-[[battery.display]]
-threshold = 100
-style = "bold #50fa7b"
+[status]
+disabled = false
+format = '[╺](dim)[ $symbol EXIT:$status ](bold crimson)'
+symbol = '✗'
+success_symbol = ''
+map_symbol = true
+recognize_signal_code = true
+pipestatus = true
 
 [character]
-success_symbol = "[➜](bold #ff5f87) "
-error_symbol = "[➜](bold #ff5555) "
+success_symbol = '[ ❯](bold crimson)'
+error_symbol = '[ ✗](bold crimson)'
+vimcmd_symbol = '[ ❮](bold ivory)'
+vimcmd_replace_one_symbol = '[ ◂](bold crimson)'
+vimcmd_replace_symbol = '[ ◀](bold crimson)'
+vimcmd_visual_symbol = '[ ◇](bold ivory)'

@@ -2,33 +2,34 @@
   "profiles": {
     "defaults": {
       "font": {
-        "face": "Cascadia Code NF",
-        "size": 14
+        "face": "JetBrainsMono Nerd Font",
+        "size": 13
       },
-      "colorScheme": "Prompt Navy"
+      "colorScheme": "VANTA"
     }
   },
   "schemes": [
     {
-      "name": "Prompt Navy",
-      "background": "#071422",
-      "foreground": "#E8EEF2",
-      "cursorColor": "#FF5F87",
-      "black": "#071422",
-      "red": "#FF5555",
-      "green": "#50FA7B",
-      "yellow": "#F1FA8C",
-      "blue": "#5FD7FF",
-      "purple": "#BD93F9",
-      "cyan": "#8BE9FD",
-      "white": "#E8EEF2",
-      "brightBlack": "#6272A4",
-      "brightRed": "#FF6E6E",
-      "brightGreen": "#69FF94",
-      "brightYellow": "#FFFFA5",
-      "brightBlue": "#8BE9FD",
-      "brightPurple": "#FF79C6",
-      "brightCyan": "#A4FFFF",
+      "name": "VANTA",
+      "background": "#050505",
+      "foreground": "#E8DFE1",
+      "cursorColor": "#C21F36",
+      "selectionBackground": "#42101B",
+      "black": "#050505",
+      "red": "#C21F36",
+      "green": "#A49AA0",
+      "yellow": "#E8DFE1",
+      "blue": "#665A60",
+      "purple": "#7D1425",
+      "cyan": "#A49AA0",
+      "white": "#E8DFE1",
+      "brightBlack": "#393237",
+      "brightRed": "#FF334A",
+      "brightGreen": "#A49AA0",
+      "brightYellow": "#FFFFFF",
+      "brightBlue": "#665A60",
+      "brightPurple": "#C21F36",
+      "brightCyan": "#A49AA0",
       "brightWhite": "#FFFFFF"
     }
   ]

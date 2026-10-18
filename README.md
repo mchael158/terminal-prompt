@@ -1,10 +1,10 @@
 # Prompt do terminal no Linux e no Windows
 
-O mesmo prompt nos dois sistemas: nome do sistema, pasta, branch do Git, versão do Rust, data e bateria. No Windows o nome sai como Windows. No Linux sai o da distribuição, por exemplo Arch ou Ubuntu.
+Tema VANTA: três linhas, marca em Fraktur, vermelho profundo e os mesmos dados de antes. No Windows o nome sai como Windows. No Linux sai o da distribuição, por exemplo Arch ou Ubuntu. A hora fica na segunda linha. A versão do Rust, o Git e o tempo do último comando só entram quando existem. Um comando que falha mostra o código de saída; um comando que deu certo não acrescenta marca.
 
 Quem abre o PowerShell, o Bash, o Zsh ou o Fish carrega esse prompt. Isso inclui o Cursor, o VS Code e qualquer outra IDE que use um desses shells.
 
-O fundo azul-escuro e a fonte com ícones valem para o terminal integrado do Cursor e do VS Code. As cores do `cargo` (`Compiling`, `Finished`, `Running`) são do próprio Cargo.
+O terminal fica preto, com texto marfim e cursor vermelho. As cores do `cargo` (`Compiling`, `Finished`, `Running`) continuam sendo do próprio Cargo.
 
 ## O que tem aqui
 
@@ -23,9 +23,9 @@ winget install --id Starship.Starship -e --scope user
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
-Instale a fonte [Cascadia Code NF](https://github.com/microsoft/cascadia-code/releases). Sem uma Nerd Font, os ícones aparecem como quadrados.
+Instale a fonte [JetBrainsMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases). Sem uma Nerd Font, alguns símbolos aparecem como quadrados. A marca 𝖁𝕬𝕹𝕿𝕬 é Unicode e não depende dessa fonte.
 
-No Windows Terminal, junte o conteúdo de `windows-terminal-fragment.json` nas configurações e escolha a fonte `Cascadia Code NF`.
+No Windows Terminal, junte o conteúdo de `windows-terminal-fragment.json` nas configurações e escolha a fonte `JetBrainsMono Nerd Font`.
 
 ## Linux
 
@@ -34,7 +34,7 @@ curl -sS https://starship.rs/install.sh | sh
 bash install.sh
 ```
 
-Instale a mesma fonte. No Arch, um pacote comum é `ttf-cascadia-code-nerd`. Em outras distribuições, o nome da fonte instalada pelo pacote Nerd Fonts pode ser `CaskaydiaCove Nerd Font`. As duas estão na configuração do Cursor e do VS Code.
+Instale a mesma fonte. No Arch, um pacote comum é `ttf-jetbrains-mono-nerd`. O nome da família pode ser `JetBrainsMono Nerd Font`. A configuração do Cursor e do VS Code também aceita a Cascadia Code NF, se ela já estiver instalada.
 
 ## Depois de instalar
 
