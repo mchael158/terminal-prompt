@@ -1,21 +1,21 @@
-# Prompt do terminal no Linux e no Windows
+# Terminal prompt for Linux and Windows
 
-Tema VANTA: três linhas, marca em Fraktur, vermelho profundo e os mesmos dados de antes. No Windows o nome sai como Windows. No Linux sai o da distribuição, por exemplo Arch ou Ubuntu. A hora fica na segunda linha. A versão do Rust, o Git e o tempo do último comando só entram quando existem. Um comando que falha mostra o código de saída; um comando que deu certo não acrescenta marca.
+VANTA theme: three lines, a Fraktur mark, deep red, and the same details as before. On Windows the name is Windows. On Linux it is the distribution name, for example Arch or Ubuntu. The time sits on the second line. The Rust version, Git, and the last command duration appear only when they exist. A failed command shows its exit code. A successful command adds no mark.
 
-Quem abre o PowerShell, o Bash, o Zsh ou o Fish carrega esse prompt em qualquer IDE.
+PowerShell, Bash, Zsh, and Fish load this prompt in any editor.
 
-O fundo do terminal usa a mesma transparência do tema, `#0a0e1400`. As letras ficam numa escala de vermelho, do sangue ao escarlate. As cores do `cargo` (`Compiling`, `Finished`, `Running`) continuam sendo do próprio Cargo.
+The terminal background uses the same transparency as the theme, `#0a0e1400`. The letters use a red scale, from blood to scarlet. `cargo` colors (`Compiling`, `Finished`, `Running`) stay Cargo's own colors.
 
-## O que tem aqui
+## What is here
 
-- `starship.toml` — o desenho do prompt, igual no Linux e no Windows
-- `Microsoft.PowerShell_profile.ps1` — liga o Starship no PowerShell
-- `shell/bash.sh`, `shell/zsh.sh`, `shell/fish.fish` — ligam o Starship no Linux
-- `IDE.json` — fonte e cores do terminal da IDE
-- `windows-terminal-fragment.json` — o mesmo esquema, para o Windows Terminal
-- `linux/` — as mesmas cores para Kitty, Alacritty, Foot e GNOME Terminal
-- `install.ps1` — instala no Windows
-- `install.sh` — instala no Linux
+- `starship.toml` — the prompt layout, the same on Linux and Windows
+- `Microsoft.PowerShell_profile.ps1` — enables Starship in PowerShell
+- `shell/bash.sh`, `shell/zsh.sh`, `shell/fish.fish` — enable Starship on Linux
+- `IDE.json` — editor terminal font and colors
+- `windows-terminal-fragment.json` — the same scheme, for Windows Terminal
+- `linux/` — the same colors for Kitty, Alacritty, Foot, and GNOME Terminal
+- `install.ps1` — installs on Windows
+- `install.sh` — installs on Linux
 
 ## Windows
 
@@ -24,9 +24,9 @@ winget install --id Starship.Starship -e --scope user
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
-Instale a fonte [JetBrainsMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases). Sem uma Nerd Font, alguns símbolos aparecem como quadrados. A marca 𝖁𝕬𝕹𝕿𝕬 é Unicode e não depende dessa fonte.
+Install the [JetBrainsMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases). Without a Nerd Font, some symbols show up as squares. The 𝖁𝕬𝕹𝕿𝕬 mark is Unicode and does not depend on that font.
 
-No Windows Terminal, junte o conteúdo de `windows-terminal-fragment.json` nas configurações e escolha a fonte `JetBrainsMono Nerd Font`.
+In Windows Terminal, merge `windows-terminal-fragment.json` into the settings and select the `JetBrainsMono Nerd Font` font.
 
 ## Linux
 
@@ -35,10 +35,10 @@ curl -sS https://starship.rs/install.sh | sh
 bash install.sh
 ```
 
-No Arch, a fonte é `sudo pacman -S ttf-jetbrains-mono-nerd`. Em outras distribuições, instale o pacote Nerd Font da JetBrains Mono. O `install.sh` liga o Bash, o Zsh e o Fish, copia as cores vermelhas para a IDE e, se estiverem instalados, para o Kitty, o Alacritty, o Foot e o GNOME Terminal. O fundo fica transparente e o nome do sistema sai como o da distribuição.
+On Arch, the font package is `sudo pacman -S ttf-jetbrains-mono-nerd`. On other distributions, install the JetBrains Mono Nerd Font package. `install.sh` enables Bash, Zsh, and Fish, copies the red colors into the editor, and, when they are installed, into Kitty, Alacritty, Foot, and GNOME Terminal. The background stays transparent, and the system name is the distribution name.
 
-## Depois de instalar
+## After installing
 
-Abra um terminal novo e recarregue a janela da IDE.
+Open a new terminal and reload the editor window.
 
-A bateria só aparece em notebook. A versão do Rust só aparece dentro de um projeto Rust.
+The battery appears only on a laptop. The Rust version appears only inside a Rust project.
