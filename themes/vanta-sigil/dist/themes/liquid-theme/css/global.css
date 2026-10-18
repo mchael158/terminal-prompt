@@ -1,7 +1,7 @@
 :root {
-  --glass-base:          rgba(10, 14, 20, 0.50);
-  --glass-mid:           rgba(10, 14, 20, 0.50);
-  --glass-clear:         rgba(10, 14, 20, 0.50);
+  --glass-base:          rgba(10, 14, 20, 0.10);
+  --glass-mid:           rgba(10, 14, 20, 0.10);
+  --glass-clear:         rgba(10, 14, 20, 0.10);
   --glass-frosted:       rgba(8, 12, 18, 0.36);
 
   --accent:              #FF1F38;
@@ -233,7 +233,7 @@
 
 .editor-container,
 .editor-group-container {
-  background: rgba(10, 14, 20, 0.50) !important;
+  background: rgba(10, 14, 20, 0.10) !important;
 }
 
 .monaco-editor,
@@ -243,7 +243,7 @@
 .monaco-editor .margin,
 .editor-instance,
 .minimap-inner-container {
-  background: rgba(10, 14, 20, 0.50) !important;
+  background: rgba(10, 14, 20, 0.10) !important;
 }
 
 /* ─── Status Bar ──────────────────────────────────────────────────────────── */

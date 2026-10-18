@@ -6,30 +6,64 @@ here=$(cd "$(dirname "$0")" && pwd)
 mkdir -p "$HOME/.config"
 cp "$here/starship.toml" "$HOME/.config/starship.toml"
 
-append_once() {
-  local file=$1
-  local snippet=$2
-  mkdir -p "$(dirname "$file")"
-  touch "$file"
-  if grep -q "# terminal-prompt" "$file"; then
+mkdir -p "$HOME/.config/vanta"
+cp "$here/shell/bash.sh" "$here/shell/zsh.sh" "$here/shell/fish.fish" "$here/shell/cargo.sh" "$HOME/.config/vanta/"
+
+install_hook() {
+  if ! command -v python3 >/dev/null 2>&1; then
+    mkdir -p "$(dirname "$1")"
+    touch "$1"
+    if ! grep -q "# terminal-prompt" "$1"; then
+      printf '\n%s\n' "$2" >> "$1"
+    fi
     return
   fi
-  printf '\n' >> "$file"
-  cat "$snippet" >> "$file"
+  python3 - "$1" "$2" << 'PY'
+import pathlib, sys
+path, hook = sys.argv[1], sys.argv[2]
+file = pathlib.Path(path)
+file.parent.mkdir(parents=True, exist_ok=True)
+text = file.read_text(encoding="utf-8") if file.exists() else ""
+start = "# terminal-prompt"
+end = "# terminal-prompt-end"
+block = hook.strip() + "\n"
+if start in text and end in text:
+    pre, rest = text.split(start, 1)
+    _, post = rest.split(end, 1)
+    post = post.lstrip("\n")
+    text = pre.rstrip() + "\n\n" + block + (("\n" + post) if post else "")
+elif start in text:
+    pre, _ = text.split(start, 1)
+    text = pre.rstrip() + "\n\n" + block
+else:
+    if text and not text.endswith("\n"):
+        text += "\n"
+    text = text.rstrip() + "\n\n" + block
+file.write_text(text, encoding="utf-8")
+PY
 }
 
-append_once "$HOME/.bashrc" "$here/shell/bash.sh"
+install_hook "$HOME/.bashrc" '# terminal-prompt
+. "$HOME/.config/vanta/bash.sh"
+# terminal-prompt-end'
 if command -v zsh >/dev/null 2>&1 || [[ -f "$HOME/.zshrc" ]]; then
-  append_once "$HOME/.zshrc" "$here/shell/zsh.sh"
+  install_hook "$HOME/.zshrc" '# terminal-prompt
+. "$HOME/.config/vanta/zsh.sh"
+# terminal-prompt-end'
 fi
 if command -v fish >/dev/null 2>&1 || [[ -d "$HOME/.config/fish" ]]; then
-  append_once "$HOME/.config/fish/config.fish" "$here/shell/fish.fish"
+  install_hook "$HOME/.config/fish/config.fish" '# terminal-prompt
+source "$HOME/.config/vanta/fish.fish"
+# terminal-prompt-end'
 fi
 
 if command -v pwsh >/dev/null 2>&1; then
   profile=$(pwsh -NoProfile -Command 'Write-Output $PROFILE')
-  mkdir -p "$(dirname "$profile")"
-  cp "$here/Microsoft.PowerShell_profile.ps1" "$profile"
+  dir=$(dirname "$profile")
+  mkdir -p "$dir"
+  cp "$here/Microsoft.PowerShell_profile.ps1" "$dir/profile.ps1"
+  printf '%s\n' '# terminal-prompt' '# O prompt fica em profile.ps1 e vale para todo host do PowerShell.' > "$dir/Microsoft.PowerShell_profile.ps1"
+  cp "$dir/Microsoft.PowerShell_profile.ps1" "$dir/Microsoft.VSCode_profile.ps1"
 fi
 
 python3 - "$here/IDE.json" << 'PY' || true
@@ -101,7 +135,7 @@ if command -v dconf >/dev/null 2>&1 && dconf list /org/gnome/terminal/legacy/pro
     dconf write "$base/use-theme-colors" false || true
     dconf write "$base/use-transparent-background" true || true
     dconf write "$base/background-transparency-percent" 100 || true
-    dconf write "$base/foreground-color" "'#FF334A'" || true
+    dconf write "$base/foreground-color" "'#FFC2C6'" || true
     dconf write "$base/background-color" "'#0A0E14'" || true
     dconf write "$base/palette" "['#4A0610', '#E1062C', '#FF1F38', '#FF4D5A', '#C40024', '#FF2D4A', '#FF6B74', '#FF8A94', '#8E1020', '#FF0033', '#FF2A40', '#FF5C66', '#FF1744', '#FF4060', '#FF7A84', '#FFB4BA']" || true
   fi

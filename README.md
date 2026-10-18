@@ -4,13 +4,13 @@ VANTA theme: three lines, a Fraktur mark, deep red, and the same details as befo
 
 PowerShell, Bash, Zsh, and Fish load this prompt in any editor.
 
-The terminal background uses the same transparency as the theme, `#0a0e1400`. The letters use a red scale, from blood to scarlet. `cargo` colors (`Compiling`, `Finished`, `Running`) stay Cargo's own colors.
+The terminal background uses the same transparency as the theme, `#0a0e1400`. The letters use a red scale, from blood to scarlet. `cargo run` keeps that scale, but the words are not one flat red: `Compiling` is scarlet, the crate name is paper, the version is flare, `Finished` is light, and `Running` is crimson.
 
 ## What is here
 
 - `starship.toml` — the prompt layout, the same on Linux and Windows
 - `Microsoft.PowerShell_profile.ps1` — enables Starship in PowerShell
-- `shell/bash.sh`, `shell/zsh.sh`, `shell/fish.fish` — enable Starship on Linux
+- `shell/bash.sh`, `shell/zsh.sh`, `shell/fish.fish`, `shell/cargo.sh` — enable Starship on Linux and paint `cargo` in the same scale
 - `IDE.json` — editor terminal font and colors
 - `windows-terminal-fragment.json` — the same scheme, for Windows Terminal
 - `linux/` — the same colors for Kitty, Alacritty, Foot, and GNOME Terminal
@@ -35,7 +35,7 @@ curl -sS https://starship.rs/install.sh | sh
 bash install.sh
 ```
 
-On Arch, the font package is `sudo pacman -S ttf-jetbrains-mono-nerd`. On other distributions, install the JetBrains Mono Nerd Font package. `install.sh` enables Bash, Zsh, and Fish, copies the red colors into the editor, and, when they are installed, into Kitty, Alacritty, Foot, and GNOME Terminal. The background stays transparent, and the system name is the distribution name.
+On Arch, the font package is `sudo pacman -S ttf-jetbrains-mono-nerd`. On other distributions, install the JetBrains Mono Nerd Font package. `install.sh` enables Bash, Zsh, and Fish, paints `cargo` the same way as on Windows, copies the red colors into the editor, and, when they are installed, into Kitty, Alacritty, Foot, and GNOME Terminal. PowerShell on Linux uses `profile.ps1`, so every host gets the prompt. The background stays transparent, and the system name is the distribution name.
 
 ## After installing
 

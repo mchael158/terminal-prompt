@@ -10,32 +10,32 @@
     "window.activeBorder": "#00000000",
     "window.inactiveBorder": "#00000000",
 
-    "editor.background": "#0a0e1480",
+    "editor.background": "#0a0e141a",
     "editor.foreground": "#B8C0CC",
-    "editorGutter.background": "#0a0e1480",
+    "editorGutter.background": "#0a0e141a",
     "editorGroupHeader.tabsBackground": "#0A0E1408",
     "editorGroupHeader.noTabsBackground": "#0A0E1408",
 
-    "sideBar.background": "#0a0e1480",
-    "sideBarSectionHeader.background": "#0a0e1480",
+    "sideBar.background": "#0a0e141a",
+    "sideBarSectionHeader.background": "#0a0e141a",
 
-    "activityBar.background": "#0a0e1480",
+    "activityBar.background": "#0a0e141a",
 
-    "panel.background": "#0a0e1480",
-    "terminal.background": "#0a0e1480",
+    "panel.background": "#0a0e141a",
+    "terminal.background": "#0a0e141a",
 
-    "statusBar.background": "#0a0e1480",
-    "statusBar.noFolderBackground": "#0a0e1480",
-    "statusBar.debuggingBackground": "#0a0e1480",
+    "statusBar.background": "#0a0e141a",
+    "statusBar.noFolderBackground": "#0a0e141a",
+    "statusBar.debuggingBackground": "#0a0e141a",
 
-    "titleBar.activeBackground": "#0a0e1480",
-    "titleBar.inactiveBackground": "#0a0e1480",
+    "titleBar.activeBackground": "#0a0e141a",
+    "titleBar.inactiveBackground": "#0a0e141a",
 
-    "tab.activeBackground": "#0a0e1480",
-    "tab.inactiveBackground": "#0a0e1480",
+    "tab.activeBackground": "#0a0e141a",
+    "tab.inactiveBackground": "#0a0e141a",
 
-    "breadcrumb.background": "#0a0e1480",
-    "minimap.background": "#0a0e1480",
+    "breadcrumb.background": "#0a0e141a",
+    "minimap.background": "#0a0e141a",
     "welcomePage.background": "#0A0E14",
 
     /* ═══ Editor Content ═══════════════════════════════════════════════════ */
@@ -57,7 +57,7 @@
     "editor.lineHighlightBorder": "#ffffff08",
 
     "editorGutter.addedBackground": "#FF4D5A60",
-    "editorGutter.modifiedBackground": "#FF1F3860",
+    "editorGutter.modifiedBackground": "#F5C54260",
     "editorGutter.deletedBackground": "#E1062C60",
 
     "editorIndentGuide.background1": "#ffffff10",
@@ -137,28 +137,28 @@
 
     /* ═══ Terminal ════════════════════════════════════════════════════════ */
 
-    "terminal.foreground": "#B8C0CC",
-    "terminal.selectionBackground": "#E23B5A40",
-    "terminal.findMatchBackground": "#E23B5A35",
-    "terminal.findMatchHighlightBackground": "#E23B5A18",
-    "terminalCursor.foreground": "#E23B5A",
+    "terminal.foreground": "#FFC2C6",
+    "terminal.selectionBackground": "#FF1F386b",
+    "terminal.findMatchBackground": "#FF1F3835",
+    "terminal.findMatchHighlightBackground": "#FF1F3818",
+    "terminalCursor.foreground": "#FF0033",
     "terminalCursor.background": "#0A0408",
-    "terminal.ansiBlack": "#1A1E24",
-    "terminal.ansiBlue": "#3AA8C5",
-    "terminal.ansiCyan": "#3AA8C5",
-    "terminal.ansiGreen": "#4CB88A",
-    "terminal.ansiMagenta": "#C45C74",
-    "terminal.ansiRed": "#E23B5A",
-    "terminal.ansiWhite": "#B8C0CC",
-    "terminal.ansiYellow": "#D9A441",
-    "terminal.ansiBrightBlack": "#66707D",
-    "terminal.ansiBrightBlue": "#5CBCD0",
-    "terminal.ansiBrightCyan": "#5CBCD0",
-    "terminal.ansiBrightGreen": "#6DCCA0",
-    "terminal.ansiBrightMagenta": "#D47A8E",
-    "terminal.ansiBrightRed": "#E85A72",
-    "terminal.ansiBrightWhite": "#D5DBE4",
-    "terminal.ansiBrightYellow": "#E4B85A",
+    "terminal.ansiBlack": "#4A0610",
+    "terminal.ansiBlue": "#C40024",
+    "terminal.ansiCyan": "#FF6B74",
+    "terminal.ansiGreen": "#FF1F38",
+    "terminal.ansiMagenta": "#FF2D4A",
+    "terminal.ansiRed": "#E1062C",
+    "terminal.ansiWhite": "#FF8A94",
+    "terminal.ansiYellow": "#FF4D5A",
+    "terminal.ansiBrightBlack": "#8E1020",
+    "terminal.ansiBrightBlue": "#FF1744",
+    "terminal.ansiBrightCyan": "#FF7A84",
+    "terminal.ansiBrightGreen": "#FF2A40",
+    "terminal.ansiBrightMagenta": "#FF4060",
+    "terminal.ansiBrightRed": "#FF0033",
+    "terminal.ansiBrightWhite": "#FFB4BA",
+    "terminal.ansiBrightYellow": "#FF5C66",
 
     /* ═══ Widgets & Overlays ══════════════════════════════════════════════ */
 
@@ -249,7 +249,7 @@
     /* ═══ Git ═════════════════════════════════════════════════════════════ */
 
     "gitDecoration.addedResourceForeground": "#FF4D5A",
-    "gitDecoration.modifiedResourceForeground": "#FF1F38",
+    "gitDecoration.modifiedResourceForeground": "#F5C542",
     "gitDecoration.deletedResourceForeground": "#E1062C",
     "gitDecoration.untrackedResourceForeground": "#FF4D5A",
     "gitDecoration.ignoredResourceForeground": "#4A0610",
@@ -285,7 +285,7 @@
     "minimapSlider.hoverBackground": "#FF1F381e",
     "minimapSlider.activeBackground": "#FF1F3830",
     "minimapGutter.addedBackground": "#FF4D5A",
-    "minimapGutter.modifiedBackground": "#FF1F38",
+    "minimapGutter.modifiedBackground": "#F5C542",
     "minimapGutter.deletedBackground": "#E1062C",
 
     /* ═══ Welcome Page ════════════════════════════════════════════════════ */

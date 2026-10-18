@@ -11,7 +11,7 @@ family = "JetBrainsMono Nerd Font"
 style = "Regular"
 
 [colors.primary]
-foreground = "#FF334A"
+foreground = "#FFC2C6"
 background = "#0A0E14"
 
 [colors.cursor]

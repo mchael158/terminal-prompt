@@ -119,7 +119,7 @@ export async function applyColorCustomizations(
   const alphaHex = (o: number) => Math.round(o * 255).toString(16).padStart(2, '0');
   const newColors = { ...current };
 
-  for (const key of TRANSPARENT_BG_KEYS) { newColors[key] = `#${THEME_BG}00`; }
+  for (const key of TRANSPARENT_BG_KEYS) { newColors[key] = `#${THEME_BG}${alphaHex(DEFAULT_OPACITY)}`; }
   for (const key of GLASS_BG_KEYS)       { newColors[key] = `#${THEME_BG}${alphaHex(DEFAULT_OPACITY)}`; }
   for (const key of FROSTED_BG_KEYS)     { newColors[key] = `#${THEME_BG}${alphaHex(FROSTED_OPACITY)}`; }
   newColors['terminal.background'] = '#00000000';
