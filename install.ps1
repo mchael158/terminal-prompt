@@ -23,7 +23,7 @@ function Merge-TerminalSettings([string]$path) {
     $raw = Get-Content -LiteralPath $path -Raw -Encoding UTF8
     if ([string]::IsNullOrWhiteSpace($raw)) { $raw = "{}" }
     $json = $raw | ConvertFrom-Json
-    $fragment = Get-Content (Join-Path $here "cursor-vscode-settings.json") -Raw -Encoding UTF8 | ConvertFrom-Json
+    $fragment = Get-Content (Join-Path $here "IDE.json") -Raw -Encoding UTF8 | ConvertFrom-Json
     foreach ($name in $fragment.PSObject.Properties.Name) {
         if ($name -eq "workbench.colorCustomizations") {
             if (-not $json.PSObject.Properties["workbench.colorCustomizations"]) {
@@ -50,6 +50,6 @@ Merge-TerminalSettings (Join-Path $env:APPDATA "Cursor\User\settings.json")
 Merge-TerminalSettings (Join-Path $env:APPDATA "Code\User\settings.json")
 
 Write-Output "Prompt copiado."
-Write-Output "Abra um terminal novo. No Cursor ou no VS Code, recarregue a janela para a fonte aparecer."
+Write-Output "Abra um terminal novo e recarregue a janela da IDE para a fonte aparecer."
 Write-Output "O Starship precisa estar instalado: winget install --id Starship.Starship -e --scope user"
 Write-Output "A fonte Cascadia Code NF precisa estar instalada para os icones."

@@ -32,7 +32,7 @@ if command -v pwsh >/dev/null 2>&1; then
   cp "$here/Microsoft.PowerShell_profile.ps1" "$profile"
 fi
 
-python3 - "$here/cursor-vscode-settings.json" << 'PY' || true
+python3 - "$here/IDE.json" << 'PY' || true
 import json, os, sys
 fragment_path = sys.argv[1]
 with open(fragment_path, encoding="utf-8") as handle:
@@ -62,6 +62,6 @@ for path in paths:
 PY
 
 echo "Prompt copiado."
-echo "Abra um terminal novo. No Cursor ou no VS Code, recarregue a janela."
+echo "Abra um terminal novo e recarregue a janela da IDE."
 echo "Instale o Starship se ainda nao tiver: curl -sS https://starship.rs/install.sh | sh"
 echo "Instale uma Nerd Font, por exemplo Cascadia Code NF, para os icones."

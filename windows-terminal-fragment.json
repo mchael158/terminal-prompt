@@ -5,13 +5,15 @@
         "face": "JetBrainsMono Nerd Font",
         "size": 13
       },
+      "useAcrylic": true,
+      "acrylicOpacity": 0,
       "colorScheme": "VANTA"
     }
   },
   "schemes": [
     {
       "name": "VANTA",
-      "background": "#050505",
+      "background": "#0A0E14",
       "foreground": "#E8DFE1",
       "cursorColor": "#C21F36",
       "selectionBackground": "#42101B",
