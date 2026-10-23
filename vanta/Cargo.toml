@@ -1,0 +1,10 @@
+[package]
+name = "vanta"
+version = "0.1.0"
+edition = "2021"
+description = "Paleta e pintura do terminal VANTA"
+publish = false
+
+[[bin]]
+name = "vanta"
+path = "src/main.rs"
