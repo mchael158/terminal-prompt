@@ -131,6 +131,20 @@ foreach ($wtPath in $wtCandidates) {
     $wt | ConvertTo-Json -Depth 30 | Set-Content -LiteralPath $wtPath -Encoding UTF8
 }
 
+$vantaDir = Join-Path $here "vanta"
+if (Get-Command cargo -CommandType Application -ErrorAction SilentlyContinue) {
+    Push-Location $vantaDir
+    & cargo build --release
+    if ($LASTEXITCODE -eq 0) {
+        $built = Join-Path $vantaDir "target\release\vanta.exe"
+        $destDir = Join-Path (Join-Path $env:USERPROFILE ".local") "bin"
+        New-Item -ItemType Directory -Force -Path $destDir | Out-Null
+        Copy-Item $built (Join-Path $destDir "vanta.exe") -Force
+        & $built sync $here
+    }
+    Pop-Location
+}
+
 Write-Output "Prompt copiado para todo host do PowerShell."
 Write-Output "Abra um terminal novo e recarregue a janela da IDE para a fonte aparecer."
 Write-Output "O Starship precisa estar instalado: winget install --id Starship.Starship -e --scope user"

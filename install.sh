@@ -7,7 +7,15 @@ mkdir -p "$HOME/.config"
 cp "$here/starship.toml" "$HOME/.config/starship.toml"
 
 mkdir -p "$HOME/.config/vanta"
-cp "$here/shell/bash.sh" "$here/shell/zsh.sh" "$here/shell/fish.fish" "$here/shell/cargo.sh" "$HOME/.config/vanta/"
+cp "$here/shell/bash.sh" "$here/shell/zsh.sh" "$here/shell/fish.fish" "$HOME/.config/vanta/"
+
+if command -v cargo >/dev/null 2>&1; then
+  (cd "$here/vanta" && cargo build --release)
+  mkdir -p "$HOME/.local/bin"
+  cp "$here/vanta/target/release/vanta" "$HOME/.local/bin/vanta"
+  chmod +x "$HOME/.local/bin/vanta"
+  "$HOME/.local/bin/vanta" sync "$here"
+fi
 
 install_hook() {
   if ! command -v python3 >/dev/null 2>&1; then

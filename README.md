@@ -10,7 +10,8 @@ The terminal background uses the same transparency as the theme, `#0a0e1400`. Th
 
 - `starship.toml` — the prompt layout, the same on Linux and Windows
 - `Microsoft.PowerShell_profile.ps1` — enables Starship in PowerShell
-- `shell/bash.sh`, `shell/zsh.sh`, `shell/fish.fish`, `shell/cargo.sh` — enable Starship on Linux and paint `cargo` in the same scale
+- `vanta/` — the Rust program that owns the palette and paints `cargo`
+- `shell/bash.sh`, `shell/zsh.sh`, `shell/fish.fish` — enable Starship and call `vanta`
 - `IDE.json` — editor terminal font and colors
 - `windows-terminal-fragment.json` — the same scheme, for Windows Terminal
 - `linux/` — the same colors for Kitty, Alacritty, Foot, and GNOME Terminal
