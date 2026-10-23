@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Restaura o prompt no Linux. Rode com: bash install.sh
 set -euo pipefail
 here=$(cd "$(dirname "$0")" && pwd)
 
@@ -10,9 +9,9 @@ mkdir -p "$HOME/.config/vanta"
 cp "$here/shell/bash.sh" "$here/shell/zsh.sh" "$here/shell/fish.fish" "$HOME/.config/vanta/"
 
 if command -v cargo >/dev/null 2>&1; then
-  (cd "$here/vanta" && cargo build --release)
+  (cd "$here" && cargo build --release)
   mkdir -p "$HOME/.local/bin"
-  cp "$here/vanta/target/release/vanta" "$HOME/.local/bin/vanta"
+  cp "$here/target/release/vanta" "$HOME/.local/bin/vanta"
   chmod +x "$HOME/.local/bin/vanta"
   "$HOME/.local/bin/vanta" sync "$here"
 fi
@@ -70,7 +69,7 @@ if command -v pwsh >/dev/null 2>&1; then
   dir=$(dirname "$profile")
   mkdir -p "$dir"
   cp "$here/Microsoft.PowerShell_profile.ps1" "$dir/profile.ps1"
-  printf '%s\n' '# terminal-prompt' '# O prompt fica em profile.ps1 e vale para todo host do PowerShell.' > "$dir/Microsoft.PowerShell_profile.ps1"
+  : > "$dir/Microsoft.PowerShell_profile.ps1"
   cp "$dir/Microsoft.PowerShell_profile.ps1" "$dir/Microsoft.VSCode_profile.ps1"
 fi
 

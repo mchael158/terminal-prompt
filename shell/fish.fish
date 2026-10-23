@@ -1,4 +1,3 @@
-# terminal-prompt
 set -gx STARSHIP_CONFIG "$HOME/.config/starship.toml"
 if type -q starship
     starship init fish | source
@@ -11,4 +10,3 @@ function cargo --wraps cargo
     end
     command cargo $argv
 end
-# terminal-prompt-end

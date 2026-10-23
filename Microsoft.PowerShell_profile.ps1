@@ -1,4 +1,3 @@
-# Liga o Starship no PowerShell, no Windows e no Linux.
 $env:STARSHIP_CONFIG = Join-Path (Join-Path $env:USERPROFILE ".config") "starship.toml"
 
 $starship = $null
@@ -13,7 +12,6 @@ if ($starship -and (Test-Path -LiteralPath $starship)) {
     Invoke-Expression (& $starship init powershell)
 }
 
-# O binario Rust pinta o cargo. O perfil so encontra o programa.
 function cargo {
     $vanta = Join-Path (Join-Path (Join-Path $env:USERPROFILE ".local") "bin") "vanta.exe"
     if (-not (Test-Path -LiteralPath $vanta)) {

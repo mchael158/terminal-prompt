@@ -1,7 +1,5 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# VANTA // BLACK SIGIL
-# O mesmo arquivo no Linux e no Windows. $type troca Windows por Arch, Ubuntu, etc.
 add_newline = false
 scan_timeout = 100
 command_timeout = 1000

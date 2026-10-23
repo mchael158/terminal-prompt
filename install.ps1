@@ -1,5 +1,3 @@
-# Restaura o prompt no Windows. No Linux, use install.sh.
-#   powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 $ErrorActionPreference = "Stop"
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
@@ -8,10 +6,7 @@ New-Item -ItemType Directory -Force -Path $configDir | Out-Null
 Copy-Item (Join-Path $here "starship.toml") (Join-Path $configDir "starship.toml") -Force
 
 $source = Join-Path $here "Microsoft.PowerShell_profile.ps1"
-$stub = @"
-# terminal-prompt
-# O prompt fica em profile.ps1 e vale para todo host do PowerShell.
-"@
+$stub = ""
 $profileDirs = @(Join-Path $env:USERPROFILE "Documents\WindowsPowerShell")
 $pwsh = Get-Command pwsh -ErrorAction SilentlyContinue
 if ($pwsh) {
@@ -131,12 +126,11 @@ foreach ($wtPath in $wtCandidates) {
     $wt | ConvertTo-Json -Depth 30 | Set-Content -LiteralPath $wtPath -Encoding UTF8
 }
 
-$vantaDir = Join-Path $here "vanta"
 if (Get-Command cargo -CommandType Application -ErrorAction SilentlyContinue) {
-    Push-Location $vantaDir
+    Push-Location $here
     & cargo build --release
     if ($LASTEXITCODE -eq 0) {
-        $built = Join-Path $vantaDir "target\release\vanta.exe"
+        $built = Join-Path $here "target\release\vanta.exe"
         $destDir = Join-Path (Join-Path $env:USERPROFILE ".local") "bin"
         New-Item -ItemType Directory -Force -Path $destDir | Out-Null
         Copy-Item $built (Join-Path $destDir "vanta.exe") -Force
