@@ -252,6 +252,58 @@
 
 .inline-chat .monaco-inputbox:focus-within {
   box-shadow:
-    0 0 0 2px rgba(122, 162, 247, 0.10),
+    0 0 0 2px rgba(255, 31, 56, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+/* ─── VANTA sigil motion ───────────────────────────────────────────────────── */
+
+.tab.active {
+  animation: lynx-glow-pulse 3.6s ease-in-out infinite;
+}
+
+.tab.dirty .tab-label {
+  animation: vanta-flicker 2.8s ease-in-out infinite;
+  color: #F5C542 !important;
+}
+
+.part.statusbar {
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 31, 56, 0.28) 50%,
+    transparent 100%
+  ) !important;
+  background-size: 220% 100% !important;
+  animation: lynx-shimmer 9s linear infinite;
+}
+
+.part.activitybar .action-item.checked .action-label,
+.part.activitybar .action-item.selected .action-label {
+  animation: lynx-glow-pulse 4.2s ease-in-out infinite;
+}
+
+.terminal-outer-container {
+  animation: vanta-terminal-edge 6s ease-in-out infinite;
+}
+
+@keyframes vanta-flicker {
+  0%, 100% { opacity: 0.78; }
+  50%      { opacity: 1; }
+}
+
+@keyframes vanta-terminal-edge {
+  0%, 100% { box-shadow: inset 0 1px 0 rgba(255, 31, 56, 0.08); }
+  50%      { box-shadow: inset 0 1px 0 rgba(255, 194, 198, 0.32); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab.active,
+  .tab.dirty .tab-label,
+  .part.statusbar,
+  .part.activitybar .action-item.checked .action-label,
+  .part.activitybar .action-item.selected .action-label,
+  .terminal-outer-container {
+    animation: none !important;
+  }
 }

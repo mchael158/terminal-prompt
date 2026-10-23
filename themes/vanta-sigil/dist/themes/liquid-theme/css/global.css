@@ -60,8 +60,8 @@
 }
 
 @keyframes lynx-glow-pulse {
-  0%, 100% { box-shadow: 0 0 12px rgba(122, 162, 247, 0.15); }
-  50%      { box-shadow: 0 0 20px rgba(122, 162, 247, 0.25); }
+  0%, 100% { box-shadow: 0 0 10px rgba(255, 31, 56, 0.16); }
+  50%      { box-shadow: 0 0 22px rgba(255, 31, 56, 0.42); }
 }
 
 @keyframes lynx-shimmer {
