@@ -6,7 +6,7 @@
         "size": 13
       },
       "useAcrylic": true,
-      "acrylicOpacity": 0,
+      "acrylicOpacity": 0.1,
       "colorScheme": "VANTA"
     }
   },

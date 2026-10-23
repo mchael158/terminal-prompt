@@ -73,6 +73,41 @@ if command -v pwsh >/dev/null 2>&1; then
   cp "$dir/Microsoft.PowerShell_profile.ps1" "$dir/Microsoft.VSCode_profile.ps1"
 fi
 
+python3 - << 'PY' || true
+import io, os, urllib.request, zipfile
+packs = [
+    ("PKief.material-icon-theme-5.39.0", "https://github.com/material-extensions/vscode-material-icon-theme/releases/download/v5.39.0/material-icon-theme-5.39.0.vsix"),
+    ("PKief.material-product-icons-1.7.1", "https://github.com/material-extensions/vscode-material-product-icons/releases/download/v1.7.1/material-product-icons-1.7.1.vsix"),
+]
+homes = [os.path.expanduser(p) for p in ("~/.cursor", "~/.vscode", "~/.vscode-oss")]
+for home in homes:
+    if not os.path.isdir(home):
+        continue
+    extensions = os.path.join(home, "extensions")
+    os.makedirs(extensions, exist_ok=True)
+    for folder, url in packs:
+        dest = os.path.join(extensions, folder)
+        if os.path.isfile(os.path.join(dest, "package.json")):
+            continue
+        request = urllib.request.Request(url, headers={"User-Agent": "vanta"})
+        with urllib.request.urlopen(request) as response:
+            data = response.read()
+        with zipfile.ZipFile(io.BytesIO(data)) as archive:
+            for name in archive.namelist():
+                if not name.startswith("extension/"):
+                    continue
+                rel = name[len("extension/"):]
+                if not rel:
+                    continue
+                out = os.path.join(dest, rel)
+                if name.endswith("/"):
+                    os.makedirs(out, exist_ok=True)
+                    continue
+                os.makedirs(os.path.dirname(out), exist_ok=True)
+                with archive.open(name) as src, open(out, "wb") as dst:
+                    dst.write(src.read())
+PY
+
 python3 - "$here/IDE.json" << 'PY' || true
 import json, os, sys
 fragment_path = sys.argv[1]
@@ -93,7 +128,7 @@ for name in editors:
             with open(path, encoding="utf-8") as handle:
                 current = json.load(handle)
         except json.JSONDecodeError:
-            print("settings com comentario, nao alterado:", path)
+            print("settings contain comments, left unchanged:", path)
             continue
     colors = current.setdefault("workbench.colorCustomizations", {})
     colors.update(fragment.get("workbench.colorCustomizations", {}))
@@ -148,7 +183,7 @@ if command -v dconf >/dev/null 2>&1 && dconf list /org/gnome/terminal/legacy/pro
   fi
 fi
 
-echo "Prompt copiado."
-echo "Abra um terminal novo e recarregue a janela da IDE."
-echo "Instale o Starship se ainda nao tiver: curl -sS https://starship.rs/install.sh | sh"
-echo "Instale a fonte: no Arch, sudo pacman -S ttf-jetbrains-mono-nerd"
+echo "Prompt installed."
+echo "Open a new terminal and reload the editor window."
+echo "Install Starship if it is missing: curl -sS https://starship.rs/install.sh | sh"
+echo "Install the font: on Arch, sudo pacman -S ttf-jetbrains-mono-nerd"

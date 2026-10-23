@@ -1,6 +1,13 @@
 {
   "workbench.colorCustomizations": {
-    "terminal.background": "#0a0e1400",
+    "editor.background": "#0a0e141a",
+    "sideBar.background": "#0a0e141a",
+    "activityBar.background": "#0a0e141a",
+    "panel.background": "#0a0e141a",
+    "terminal.background": "#0a0e141a",
+    "statusBar.background": "#0a0e141a",
+    "titleBar.activeBackground": "#0a0e141a",
+    "titleBar.inactiveBackground": "#0a0e141a",
     "terminal.foreground": "#FFC2C6",
     "terminalCursor.foreground": "#FF0033",
     "terminal.selectionBackground": "#FF1F386b",
@@ -30,5 +37,8 @@
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.gpuAcceleration": "off",
   "terminal.integrated.minimumContrastRatio": 1,
-  "terminal.integrated.defaultProfile.windows": "PowerShell"
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.productIconTheme": "material-product-icons",
+  "material-icon-theme.activeIconPack": "none"
 }

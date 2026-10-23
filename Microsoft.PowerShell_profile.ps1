@@ -35,7 +35,7 @@ function cargo {
         if ($app.Source) { $exe = $app.Source; break }
     }
     if (-not $exe) {
-        Write-Error "cargo nao encontrado no PATH"
+        Write-Error "cargo not found on PATH"
         return
     }
     & $exe @args

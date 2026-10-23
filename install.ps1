@@ -90,6 +90,39 @@ function Merge-TerminalSettings([string]$path) {
     $json | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $path -Encoding UTF8
 }
 
+function Install-VantaIcons([string]$ideHome) {
+    if (-not (Test-Path -LiteralPath $ideHome)) { return }
+    $extensions = Join-Path $ideHome "extensions"
+    New-Item -ItemType Directory -Force -Path $extensions | Out-Null
+    $packs = @(
+        @{
+            Folder = "PKief.material-icon-theme-5.39.0"
+            Url = "https://github.com/material-extensions/vscode-material-icon-theme/releases/download/v5.39.0/material-icon-theme-5.39.0.vsix"
+        },
+        @{
+            Folder = "PKief.material-product-icons-1.7.1"
+            Url = "https://github.com/material-extensions/vscode-material-product-icons/releases/download/v1.7.1/material-product-icons-1.7.1.vsix"
+        }
+    )
+    foreach ($pack in $packs) {
+        $dest = Join-Path $extensions $pack.Folder
+        if (Test-Path -LiteralPath (Join-Path $dest "package.json")) { continue }
+        $tmp = Join-Path $env:TEMP ($pack.Folder + ".vsix")
+        Invoke-WebRequest -Uri $pack.Url -OutFile $tmp -UseBasicParsing
+        $extract = Join-Path $env:TEMP ($pack.Folder + "-extract")
+        if (Test-Path $extract) { Remove-Item $extract -Recurse -Force }
+        New-Item -ItemType Directory -Path $extract | Out-Null
+        $zip = Join-Path $extract "ext.zip"
+        Copy-Item $tmp $zip
+        Expand-Archive -LiteralPath $zip -DestinationPath $extract -Force
+        New-Item -ItemType Directory -Force -Path $dest | Out-Null
+        Copy-Item (Join-Path $extract "extension\*") $dest -Recurse -Force
+    }
+}
+
+Install-VantaIcons (Join-Path $env:USERPROFILE ".cursor")
+Install-VantaIcons (Join-Path $env:USERPROFILE ".vscode")
+
 Merge-TerminalSettings (Join-Path $env:APPDATA "Cursor\User\settings.json")
 Merge-TerminalSettings (Join-Path $env:APPDATA "Code\User\settings.json")
 
@@ -112,7 +145,7 @@ foreach ($wtPath in $wtCandidates) {
     }
     $wt.profiles.defaults | Add-Member -NotePropertyName "colorScheme" -NotePropertyValue "VANTA" -Force
     $wt.profiles.defaults | Add-Member -NotePropertyName "useAcrylic" -NotePropertyValue $true -Force
-    $wt.profiles.defaults | Add-Member -NotePropertyName "acrylicOpacity" -NotePropertyValue 0 -Force
+    $wt.profiles.defaults | Add-Member -NotePropertyName "acrylicOpacity" -NotePropertyValue 0.1 -Force
     if (-not $wt.profiles.defaults.PSObject.Properties["font"]) {
         $wt.profiles.defaults | Add-Member -NotePropertyName "font" -NotePropertyValue ([pscustomobject]@{ face = "JetBrainsMono Nerd Font"; size = 13 })
     } else {
@@ -139,7 +172,3 @@ if (Get-Command cargo -CommandType Application -ErrorAction SilentlyContinue) {
     Pop-Location
 }
 
-Write-Output "Prompt copiado para todo host do PowerShell."
-Write-Output "Abra um terminal novo e recarregue a janela da IDE para a fonte aparecer."
-Write-Output "O Starship precisa estar instalado: winget install --id Starship.Starship -e --scope user"
-Write-Output "A fonte JetBrainsMono Nerd Font precisa estar instalada para os icones."

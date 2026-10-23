@@ -25,15 +25,15 @@ fn run() -> io::Result<i32> {
         Some("sync") => {
             let root = args.next().map(PathBuf::from).unwrap_or(env::current_dir()?);
             sync::write_terminal_files(&root)?;
-            println!("cores gravadas a partir da paleta");
+            println!("colors written from the palette");
             Ok(0)
         }
         Some("install") => install(),
         _ => {
             println!(
-                "vanta cargo [args]   pinta Compiling, Finished e Running\n\
-                 vanta install        copia o programa para ~/.local/bin\n\
-                 vanta sync [pasta]   grava kitty, alacritty, foot e o fragmento do Windows"
+                "vanta cargo [args]   paints Compiling, Finished, and Running\n\
+                 vanta install        copies the program to ~/.local/bin\n\
+                 vanta sync [dir]     writes kitty, alacritty, foot, and the Windows fragment"
             );
             Ok(0)
         }
@@ -56,7 +56,7 @@ fn run_cargo(args: Vec<String>) -> io::Result<i32> {
     let stderr = child
         .stderr
         .take()
-        .ok_or_else(|| io::Error::other("stderr do cargo nao foi canalizado"))?;
+        .ok_or_else(|| io::Error::other("cargo stderr was not piped"))?;
     let mut err = io::stderr().lock();
     forward_stderr(stderr, &mut err)?;
     status(child.wait()?)
@@ -125,7 +125,7 @@ fn install() -> io::Result<i32> {
     let exe = env::current_exe()?;
     let home = env::var_os("USERPROFILE")
         .or_else(|| env::var_os("HOME"))
-        .ok_or_else(|| io::Error::new(io::ErrorKind::NotFound, "home nao encontrado"))?;
+        .ok_or_else(|| io::Error::new(io::ErrorKind::NotFound, "home directory not found"))?;
     let dir = PathBuf::from(home).join(".local").join("bin");
     fs_create(&dir)?;
     let name = if cfg!(windows) { "vanta.exe" } else { "vanta" };
@@ -133,7 +133,7 @@ fn install() -> io::Result<i32> {
     if exe != dest {
         std::fs::copy(&exe, &dest)?;
     }
-    println!("vanta instalado em {}", dest.display());
+    println!("vanta installed at {}", dest.display());
     Ok(0)
 }
 
