@@ -12,13 +12,13 @@ format = """
 [╰─](bold crimson)$character"""
 
 [palettes.vanta]
-ember = '#4A0610'
-blood = '#8E1020'
-crimson = '#E1062C'
-scarlet = '#FF1F38'
-hot = '#FF4D5A'
-flare = '#FF8A94'
-blush = '#FFC2C6'
+ember = '#3A9A8C'
+blood = '#0E5C52'
+crimson = '#14967E'
+scarlet = '#2EE0C0'
+hot = '#5AF0D4'
+flare = '#8AF8E6'
+blush = '#B7F6E8'
 
 [os]
 disabled = false

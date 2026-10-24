@@ -1,10 +1,10 @@
 # Terminal prompt for Linux and Windows
 
-VANTA theme: three lines, a Fraktur mark, deep red, and the same details as before. On Windows the name is Windows. On Linux it is the distribution name, for example Arch or Ubuntu. The time sits on the second line. The Rust version, Git, and the last command duration appear only when they exist. A failed command shows its exit code. A successful command adds no mark.
+VANTA theme: three lines, a Fraktur mark, ghost blue-green, and the same details as before. On Windows the name is Windows. On Linux it is the distribution name, for example Arch or Ubuntu. The time sits on the second line. The Rust version, Git, and the last command duration appear only when they exist. A failed command shows its exit code. A successful command adds no mark.
 
 PowerShell, Bash, Zsh, and Fish load this prompt in any editor.
 
-The terminal background uses the same transparency as the theme, `#0a0e1400`. The letters use a red scale, from blood to scarlet. `cargo run` keeps that scale, but the words are not one flat red: `Compiling` is scarlet, the crate name is paper, the version is flare, `Finished` is light, and `Running` is crimson.
+The terminal background uses the same transparency as the theme, 50% opacity (`#0a0e1480`). The letters use a ghost blue-green, from deep teal to pale aqua. `cargo run` keeps that scale: `Compiling` is bright, the crate name is paper, the version is flare, `Finished` is light, and `Running` is deeper.
 
 ## What is here
 

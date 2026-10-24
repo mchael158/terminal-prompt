@@ -6,7 +6,7 @@
         "size": 13
       },
       "useAcrylic": true,
-      "acrylicOpacity": 0.1,
+      "acrylicOpacity": 0.5,
       "colorScheme": "VANTA"
     }
   },
@@ -14,25 +14,25 @@
     {
       "name": "VANTA",
       "background": "#0A0E14",
-      "foreground": "#FFC2C6",
-      "cursorColor": "#FF0033",
-      "selectionBackground": "#FF1F38",
-      "black": "#4A0610",
+      "foreground": "#B7F6E8",
+      "cursorColor": "#3DFFE0",
+      "selectionBackground": "#2EE0C0",
+      "black": "#123632",
       "red": "#E1062C",
-      "green": "#FF1F38",
-      "yellow": "#FF4D5A",
-      "blue": "#C40024",
-      "purple": "#FF2D4A",
-      "cyan": "#FF6B74",
-      "white": "#FF8A94",
-      "brightBlack": "#8E1020",
-      "brightRed": "#FF0033",
-      "brightGreen": "#FF2A40",
-      "brightYellow": "#FF5C66",
-      "brightBlue": "#FF1744",
-      "brightPurple": "#FF4060",
-      "brightCyan": "#FF7A84",
-      "brightWhite": "#FFB4BA"
+      "green": "#2EE0C0",
+      "yellow": "#F5C542",
+      "blue": "#0E7A68",
+      "purple": "#24C8AE",
+      "cyan": "#7AF6DE",
+      "white": "#A8F0E2",
+      "brightBlack": "#0E5C52",
+      "brightRed": "#FF4D6A",
+      "brightGreen": "#4AE8D0",
+      "brightYellow": "#FFE08A",
+      "brightBlue": "#1AD4B8",
+      "brightPurple": "#3ADCC4",
+      "brightCyan": "#8AF8E6",
+      "brightWhite": "#C8FFF4"
     }
   ]
 }

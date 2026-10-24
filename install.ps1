@@ -30,10 +30,10 @@ function ConvertTo-ColorRef([string]$hex) {
 }
 
 $palette = @(
-    "#0A0E14", "#E1062C", "#FF1F38", "#FF4D5A",
-    "#C40024", "#FF2D4A", "#FF6B74", "#FF8A94",
-    "#8E1020", "#FF0033", "#FF2A40", "#FF5C66",
-    "#FF1744", "#FF4060", "#FF7A84", "#FFB4BA"
+    "#0A0E14", "#E1062C", "#2EE0C0", "#F5C542",
+    "#0E7A68", "#24C8AE", "#7AF6DE", "#A8F0E2",
+    "#0E5C52", "#FF4D6A", "#4AE8D0", "#FFE08A",
+    "#1AD4B8", "#3ADCC4", "#8AF8E6", "#C8FFF4"
 )
 $consoleKeys = @(
     "HKCU:\Console",
@@ -120,8 +120,20 @@ function Install-VantaIcons([string]$ideHome) {
     }
 }
 
+function Set-GhostIcons([string]$ideHome) {
+    $icons = Join-Path $ideHome "extensions\PKief.material-icon-theme-5.39.0\icons"
+    if (-not (Test-Path -LiteralPath $icons)) { return }
+    Get-ChildItem -LiteralPath $icons -Filter *.svg -Recurse | ForEach-Object {
+        $text = [IO.File]::ReadAllText($_.FullName)
+        $next = [regex]::Replace($text, '#[0-9A-Fa-f]{6}', '#7EE8D4')
+        if ($next -ne $text) { [IO.File]::WriteAllText($_.FullName, $next) }
+    }
+}
+
 Install-VantaIcons (Join-Path $env:USERPROFILE ".cursor")
 Install-VantaIcons (Join-Path $env:USERPROFILE ".vscode")
+Set-GhostIcons (Join-Path $env:USERPROFILE ".cursor")
+Set-GhostIcons (Join-Path $env:USERPROFILE ".vscode")
 
 Merge-TerminalSettings (Join-Path $env:APPDATA "Cursor\User\settings.json")
 Merge-TerminalSettings (Join-Path $env:APPDATA "Code\User\settings.json")
@@ -145,7 +157,7 @@ foreach ($wtPath in $wtCandidates) {
     }
     $wt.profiles.defaults | Add-Member -NotePropertyName "colorScheme" -NotePropertyValue "VANTA" -Force
     $wt.profiles.defaults | Add-Member -NotePropertyName "useAcrylic" -NotePropertyValue $true -Force
-    $wt.profiles.defaults | Add-Member -NotePropertyName "acrylicOpacity" -NotePropertyValue 0.1 -Force
+    $wt.profiles.defaults | Add-Member -NotePropertyName "acrylicOpacity" -NotePropertyValue 0.5 -Force
     if (-not $wt.profiles.defaults.PSObject.Properties["font"]) {
         $wt.profiles.defaults | Add-Member -NotePropertyName "font" -NotePropertyValue ([pscustomobject]@{ face = "JetBrainsMono Nerd Font"; size = 13 })
     } else {

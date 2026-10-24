@@ -45,10 +45,12 @@ fn verb_color(verb: &str) -> Rgb {
     match verb {
         "Compiling" | "Building" => VANTA.scarlet,
         "Checking" | "Doc-tests" => VANTA.hot,
-        "Downloading" | "warning" => VANTA.flare,
+        "Downloading" => VANTA.flare,
+        "warning" => VANTA.warning,
         "Downloaded" | "Fresh" => VANTA.blood,
         "Finished" => VANTA.paper,
-        "Running" | "error" => VANTA.crimson,
+        "Running" => VANTA.crimson,
+        "error" => VANTA.error,
         "Blocking" => VANTA.ember,
         _ => VANTA.hot,
     }
@@ -59,6 +61,8 @@ fn paint_rest(verb: &str, rest: &str) -> String {
         "Compiling" | "Checking" | "Building" | "Fresh" | "Downloading" | "Downloaded"
         | "Doc-tests" => paint_package(rest).unwrap_or_else(|| VANTA.blush.paint(rest, false)),
         "Finished" | "Running" => paint_quoted(verb, rest).unwrap_or_else(|| VANTA.blush.paint(rest, false)),
+        "error" => VANTA.error.paint(rest, false),
+        "warning" => VANTA.warning.paint(rest, false),
         _ => VANTA.blush.paint(rest, false),
     }
 }
@@ -81,7 +85,7 @@ fn paint_package(rest: &str) -> Option<String> {
     out.push_str(&VANTA.paper.paint(name, true));
     out.push_str(&VANTA.blush.paint(mid, false));
     out.push_str(&VANTA.flare.paint(ver, false));
-    out.push_str(&VANTA.ember.paint(tail.trim_end(), false));
+    out.push_str(&VANTA.blush.paint(tail.trim_end(), false));
     Some(out)
 }
 
@@ -116,7 +120,7 @@ fn paint_test(line: &str) -> Option<String> {
     }
     let ink = match status {
         "ok" => VANTA.flare,
-        "FAILED" | "failed" => VANTA.crimson,
+        "FAILED" | "failed" => VANTA.error,
         "ignored" => VANTA.ember,
         _ => return None,
     };
@@ -131,7 +135,7 @@ fn paint_summary(line: &str) -> Option<String> {
     let (word, tail) = rest.split_once(|c: char| !c.is_ascii_alphabetic())?;
     let ink = match word {
         "ok" => VANTA.flare,
-        "FAILED" => VANTA.crimson,
+        "FAILED" => VANTA.error,
         _ => return None,
     };
     let mut out = VANTA.blood.paint("test result: ", true);
@@ -184,20 +188,20 @@ mod tests {
     #[test]
     fn compiling_uses_three_tones() {
         let line = paint_line("   Compiling byteflow-actors v0.9.17 (C:/src/byteflow)");
-        assert!(line.contains("1;38;2;255;31;56mCompiling"));
-        assert!(line.contains("1;38;2;255;228;230mbyteflow-actors"));
-        assert!(line.contains("38;2;255;138;148mv0.9.17"));
-        assert!(line.contains("38;2;160;64;80m (C:/src/byteflow)"));
+        assert!(line.contains("1;38;2;46;224;192mCompiling"));
+        assert!(line.contains("1;38;2;231;255;248mbyteflow-actors"));
+        assert!(line.contains("38;2;138;248;230mv0.9.17"));
+        assert!(line.contains("38;2;183;246;232m (C:/src/byteflow)"));
     }
 
     #[test]
     fn finished_and_running_differ() {
         let finished = paint_line("    Finished `dev` profile [unoptimized] target(s) in 0.60s");
         let running = paint_line("     Running `target/debug/byteflow demo`");
-        assert!(finished.contains("1;38;2;255;228;230mFinished"));
-        assert!(finished.contains("1;38;2;255;31;56mdev"));
-        assert!(running.contains("1;38;2;225;6;44mRunning"));
-        assert!(running.contains("1;38;2;255;228;230mtarget/debug/byteflow demo"));
+        assert!(finished.contains("1;38;2;231;255;248mFinished"));
+        assert!(finished.contains("1;38;2;46;224;192mdev"));
+        assert!(running.contains("1;38;2;20;150;126mRunning"));
+        assert!(running.contains("1;38;2;231;255;248mtarget/debug/byteflow demo"));
     }
 
     #[test]
@@ -216,11 +220,11 @@ mod tests {
     #[test]
     fn tests_and_duration_are_marked() {
         let finished = paint_line("    Finished `dev` profile [unoptimized] target(s) in 0.60s");
-        assert!(finished.contains("1;38;2;255;138;148m0.60s"));
+        assert!(finished.contains("1;38;2;138;248;230m0.60s"));
         let ok = paint_line("test paint::tests::compiling_uses_three_tones ... ok");
-        assert!(ok.contains("1;38;2;255;138;148mok"));
+        assert!(ok.contains("1;38;2;138;248;230mok"));
         let failed = paint_line("test result: FAILED. 0 passed; 1 failed; finished in 1s");
         assert!(failed.contains("1;38;2;225;6;44mFAILED"));
-        assert!(failed.contains("1;38;2;255;138;148m1s"));
+        assert!(failed.contains("1;38;2;138;248;230m1s"));
     }
 }

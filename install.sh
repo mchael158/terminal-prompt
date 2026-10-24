@@ -74,7 +74,7 @@ if command -v pwsh >/dev/null 2>&1; then
 fi
 
 python3 - << 'PY' || true
-import io, os, urllib.request, zipfile
+import io, os, re, urllib.request, zipfile
 packs = [
     ("PKief.material-icon-theme-5.39.0", "https://github.com/material-extensions/vscode-material-icon-theme/releases/download/v5.39.0/material-icon-theme-5.39.0.vsix"),
     ("PKief.material-product-icons-1.7.1", "https://github.com/material-extensions/vscode-material-product-icons/releases/download/v1.7.1/material-product-icons-1.7.1.vsix"),
@@ -87,25 +87,37 @@ for home in homes:
     os.makedirs(extensions, exist_ok=True)
     for folder, url in packs:
         dest = os.path.join(extensions, folder)
-        if os.path.isfile(os.path.join(dest, "package.json")):
-            continue
-        request = urllib.request.Request(url, headers={"User-Agent": "vanta"})
-        with urllib.request.urlopen(request) as response:
-            data = response.read()
-        with zipfile.ZipFile(io.BytesIO(data)) as archive:
-            for name in archive.namelist():
-                if not name.startswith("extension/"):
-                    continue
-                rel = name[len("extension/"):]
-                if not rel:
-                    continue
-                out = os.path.join(dest, rel)
-                if name.endswith("/"):
-                    os.makedirs(out, exist_ok=True)
-                    continue
-                os.makedirs(os.path.dirname(out), exist_ok=True)
-                with archive.open(name) as src, open(out, "wb") as dst:
-                    dst.write(src.read())
+        if not os.path.isfile(os.path.join(dest, "package.json")):
+            request = urllib.request.Request(url, headers={"User-Agent": "vanta"})
+            with urllib.request.urlopen(request) as response:
+                data = response.read()
+            with zipfile.ZipFile(io.BytesIO(data)) as archive:
+                for name in archive.namelist():
+                    if not name.startswith("extension/"):
+                        continue
+                    rel = name[len("extension/"):]
+                    if not rel:
+                        continue
+                    out = os.path.join(dest, rel)
+                    if name.endswith("/"):
+                        os.makedirs(out, exist_ok=True)
+                        continue
+                    os.makedirs(os.path.dirname(out), exist_ok=True)
+                    with archive.open(name) as src, open(out, "wb") as dst:
+                        dst.write(src.read())
+        icons = os.path.join(dest, "icons")
+        if os.path.isdir(icons):
+            for root, _, names in os.walk(icons):
+                for name in names:
+                    if not name.endswith(".svg"):
+                        continue
+                    path = os.path.join(root, name)
+                    with open(path, encoding="utf-8") as handle:
+                        text = handle.read()
+                    painted = re.sub(r"#[0-9A-Fa-f]{6}", "#7EE8D4", text)
+                    if painted != text:
+                        with open(path, "w", encoding="utf-8", newline="\n") as handle:
+                            handle.write(painted)
 PY
 
 python3 - "$here/IDE.json" << 'PY' || true
@@ -176,10 +188,10 @@ if command -v dconf >/dev/null 2>&1 && dconf list /org/gnome/terminal/legacy/pro
     base="/org/gnome/terminal/legacy/profiles:/:$uuid"
     dconf write "$base/use-theme-colors" false || true
     dconf write "$base/use-transparent-background" true || true
-    dconf write "$base/background-transparency-percent" 100 || true
-    dconf write "$base/foreground-color" "'#FFC2C6'" || true
+    dconf write "$base/background-transparency-percent" 70 || true
+    dconf write "$base/foreground-color" "'#B7F6E8'" || true
     dconf write "$base/background-color" "'#0A0E14'" || true
-    dconf write "$base/palette" "['#4A0610', '#E1062C', '#FF1F38', '#FF4D5A', '#C40024', '#FF2D4A', '#FF6B74', '#FF8A94', '#8E1020', '#FF0033', '#FF2A40', '#FF5C66', '#FF1744', '#FF4060', '#FF7A84', '#FFB4BA']" || true
+    dconf write "$base/palette" "['#123632', '#E1062C', '#2EE0C0', '#F5C542', '#0E7A68', '#24C8AE', '#7AF6DE', '#A8F0E2', '#0E5C52', '#FF4D6A', '#4AE8D0', '#FFE08A', '#1AD4B8', '#3ADCC4', '#8AF8E6', '#C8FFF4']" || true
   fi
 fi
 

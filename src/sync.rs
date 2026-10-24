@@ -18,7 +18,7 @@ fn kitty() -> String {
     format!(
         r#"foreground {fg}
 background {bg}
-background_opacity 0.1
+background_opacity 0.5
 cursor {cursor}
 cursor_text_color {bg}
 selection_background {sel}
@@ -72,7 +72,7 @@ fn alacritty() -> String {
     let a = &VANTA.ansi;
     format!(
         r#"[window]
-opacity = 0.1
+opacity = 0.5
 
 [font]
 size = 13
@@ -141,7 +141,7 @@ fn foot() -> String {
     format!(
         r#"font=JetBrainsMono Nerd Font:size=13
 [colors]
-alpha=0.1
+alpha=0.5
 foreground={fg}
 background={bg}
 cursor={cursor}
@@ -199,7 +199,7 @@ fn windows_terminal() -> String {
         "size": 13
       }},
       "useAcrylic": true,
-      "acrylicOpacity": 0.1,
+      "acrylicOpacity": 0.5,
       "colorScheme": "VANTA"
     }}
   }},
